@@ -17427,8 +17427,18 @@ var runtime_core_1 = __webpack_require__(/*! @vue/runtime-core */ "./node_module
 
 exports["default"] = (0, runtime_core_1.defineComponent)({
   name: "ExampleComponent",
+  data: function data() {
+    return {
+      count: 0
+    };
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  methods: {
+    increment: function increment() {
+      this.count++;
+    }
   }
 });
 
@@ -17453,13 +17463,48 @@ var vue_1 = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bund
 var _hoisted_1 = {
   "class": "container"
 };
+var _hoisted_2 = {
+  "class": "row justify-content-center"
+};
+var _hoisted_3 = {
+  "class": "col-md-8"
+};
+var _hoisted_4 = {
+  "class": "card"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0, vue_1.createStaticVNode)("<div class=\"row justify-content-center\"><div class=\"col-md-8\"><div class=\"card\"><div class=\"card-header\">Example Component</div><div class=\"card-body\"> I&#39;m an example component. </div></div></div></div>", 1);
+var _hoisted_5 = /*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  "class": "card-header"
+}, "Example Component", -1
+/* HOISTED */
+);
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_6 = /*#__PURE__*/(0, vue_1.createElementVNode)("div", {
+  "class": "card-body"
+}, " I'm an example component. ", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = {
+  id: "times-clicked-counter"
+};
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0, vue_1.openBlock)(), (0, vue_1.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  return (0, vue_1.openBlock)(), (0, vue_1.createElementBlock)("div", _hoisted_1, [(0, vue_1.createElementVNode)("div", _hoisted_2, [(0, vue_1.createElementVNode)("div", _hoisted_3, [(0, vue_1.createElementVNode)("div", _hoisted_4, [_hoisted_5, _hoisted_6, (0, vue_1.createElementVNode)("div", null, [(0, vue_1.createElementVNode)("p", _hoisted_7, "Times clicked: " + (0, vue_1.toDisplayString)(_ctx.count), 1
+  /* TEXT */
+  ), (0, vue_1.createElementVNode)("button", {
+    onClick: _cache[0] || (_cache[0] = //@ts-ignore
+    function () {
+      var args = [];
+
+      for (var _i = 0; _i < arguments.length; _i++) {
+        args[_i] = arguments[_i];
+      }
+
+      return _ctx.increment && _ctx.increment.apply(_ctx, args);
+    }),
+    id: "increment-count-button"
+  }, "increment")])])])])]);
 }
 
 exports.render = render;
