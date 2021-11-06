@@ -5,7 +5,7 @@ const routes = [
         path: "/",
         name: "ExampleComponent",
         component: () =>
-            import("../components/ExampleComponent")
+            import("../components/ExampleComponent.vue")
     },
     {
         path: "/:catchAll(.*)",

@@ -7,13 +7,18 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "test": "jest --verbose"
     },
     "devDependencies": {
+        "@testing-library/vue": "^6.4.2",
+        "@types/jest": "^27.0.2",
         "@vue/compat": "^3.2.20",
         "@vue/compiler-sfc": "^3.2.20",
+        "@vue/vue3-jest": "^27.0.0-alpha.3",
         "axios": "^0.21",
         "bootstrap": "^4.6.0",
+        "jest": "^27.3.1",
         "jquery": "^3.6",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -22,6 +27,9 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
+        "ts-jest": "^27.0.7",
+        "ts-loader": "^9.2.6",
+        "typescript": "^4.4.4",
         "vue": "^3.2.20",
         "vue-loader": "^16.8.2",
         "vue-router": "^4.0.12"
