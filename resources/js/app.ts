@@ -2,4 +2,10 @@ import { createApp } from 'vue';
 import router from "./router";
 import App from './App.vue';
 
-createApp(App).use(router).mount('#app');
+import Default from './layouts/DefaultLayout.vue';
+import Login from './layouts/LoginLayout.vue';
+
+createApp(App).use(router)
+    .component('default-layout', Default)
+    .component('login-layout', Login)
+    .mount('#app');
