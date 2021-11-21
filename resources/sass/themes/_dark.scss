@@ -1,0 +1,20 @@
+html[theme="dark"] {
+
+    /* redefine theme colors for dark theme */
+    $success: #94ce9c;
+    $info: #67a9ed;
+    $warning: #ffd69f;
+    $danger: #eb999a;
+
+    $body-bg: #1a1a1d;
+    $body-color: #111;
+
+    $theme-colors: (
+        "success": $success,
+        "danger": $danger,
+        "info": $info,
+        "warning": $warning
+    );
+
+    @import '~bootstrap/scss/bootstrap';
+}
