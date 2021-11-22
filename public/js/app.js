@@ -17593,6 +17593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       return _ctx.increment && _ctx.increment.apply(_ctx, args);
     }),
+    "class": "btn btn-primary",
     id: "increment-count-button"
   }, "increment")])])])])]);
 }
