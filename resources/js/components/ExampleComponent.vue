@@ -10,7 +10,7 @@
                     </div>
                     <div>
                         <p id="times-clicked-counter">Times clicked: {{ count }}</p>
-                        <button @click="increment" id="increment-count-button">increment</button>
+                        <button @click="increment" class="btn btn-primary" id="increment-count-button">increment</button>
                     </div>
                 </div>
             </div>

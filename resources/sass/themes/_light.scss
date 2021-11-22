@@ -1,21 +1,18 @@
-html[theme="dark"] {
+html[theme="light"] {
     // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
     @import "~bootstrap/scss/functions";
 
     @import "../includes/functions";
 
     // 2. Include any default variable overrides here
-    $primary: #df6668;
-    $secondary: shift-color($primary, -10%);
-    $tertiary: shift-color($primary, -40%);
+    $primary: #fe2c32;
+    $secondary: shift-color($primary, 10%);
+    $tertiary: shift-color($primary, 40%);
 
-    $success: #94ce9c;
-    $info: #67a9ed;
-    $warning: #ffd69f;
-    $danger: #eb999a;
-
-    $body-bg: #1a1a1d;
-    $body-color: #111;
+    $success: #80ae35;
+    $info: #2c62ba;
+    $warning: #fb902d;
+    $danger: #cb0000;
 
     $theme-colors: (
         "primary": $primary,

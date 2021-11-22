@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <title>LaraBB Admin Panel</title>
-    <body class="dark">
+    <body>
         <div id="app">
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
