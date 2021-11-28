@@ -30,7 +30,7 @@ class Forum extends Model
     }
 
     public function sub_forums() {
-        return $this->hasMany(Forum::class, 'id');
+        return $this->hasMany(Forum::class, 'parent');
     }
 
     public function topics() {
