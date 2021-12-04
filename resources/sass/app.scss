@@ -7,3 +7,9 @@
 // Themes
 @import "themes/light";
 @import "themes/dark";
+
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+#sidebar-nav {
+    width: 160px;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,5 +9,6 @@
         <div id="app">
         </div>
         <script src="{{ mix('/js/app.js') }}"></script>
+        <script src="{{ mix('/js/bootstrap.js') }}"></script>
     </body>
 </html>
