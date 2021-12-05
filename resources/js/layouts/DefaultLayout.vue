@@ -17,7 +17,16 @@
                 </div>
             </div>
             <main class="col ps-md-2 pt-2">
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+                <div class="container-fluid no-gutters p-0">
+                    <div class="col-12">
+                        <header class="ascent d-flex justify-content-between align-items-center">
+                            <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" style="font-size: 30px" class="text-decoration-none"><i class="bi bi-list"></i></a>
+                            <div class="d-flex justify-content-between align-items-center">
+
+                            </div>
+                        </header>
+                    </div>
+                </div>
 
                 <!-- START MAIN CONTENT -->
                 <slot />

@@ -14,8 +14,13 @@ html[theme="dark"] {
     $warning: #ffd69f;
     $danger: #eb999a;
 
-    $body-bg: #1a1a1d;
-    $body-color: #111;
+    $body-bg: #121212;
+    $body-color: #ffffff;
+
+    // -- Cards
+
+    $card-bg: #1e1e1e;
+    $card-border-color: #1e1e1e;
 
     $theme-colors: (
         "primary": $primary,
@@ -32,6 +37,5 @@ html[theme="dark"] {
     @import "~bootstrap/scss/mixins";
 
     // 4. Include any optional Bootstrap components as you like
-    @import "../includes/optionals";
-
+    @import "../includes/styles";
 }

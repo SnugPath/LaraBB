@@ -14,6 +14,10 @@ html[theme="light"] {
     $warning: #fb902d;
     $danger: #cb0000;
 
+    // -- Cards
+
+    $card-border-color: #eaeaea;
+
     $theme-colors: (
         "primary": $primary,
         "secondary": $secondary,
@@ -29,5 +33,5 @@ html[theme="light"] {
     @import "~bootstrap/scss/mixins";
 
     // 4. Include any optional Bootstrap components as you like
-    @import "../includes/optionals";
+    @import "../includes/styles";
 }
