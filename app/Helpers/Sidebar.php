@@ -1,30 +1,38 @@
 <?php
 namespace App\Helpers;
 
+use Exception;
+
 class Sidebar {
 
-    private array $items = [];
+    /**
+     * @throws Exception
+     */
+    function add_section(string $name, int $priority = 0, bool $return_section = true) {
 
-    public function add_section (
-        string $name
-    ) {
-        $new_section = new Section();
-        $this->items[$name] = $new_section;
-    }
+        $title = Sidebar::parse($name);
 
-    public function add_menu (
-        string $name,
-        string $section,
-        ?string $path = null
-    ) {
-        if ( array_key_exists($section, $this->items)) {
-            $new_menu = new Menu($path);
-            $this->items[$section]->add_item($name, $new_menu);
+        if (property_exists($this, $title)) {
+            throw new Exception("Section $name already exists!");
         }
+
+        $this->{$title} = new Section($name, $priority);
+
+        if (!$return_section) {
+            return $this;
+        }
+
+        return $this->{$title};
     }
 
-    public function get_items(): array {
-        return $this->items;
+    public static function parse($str): string
+    {
+        // remove numbers
+        $str = preg_replace('/[0-9]+/', '', $str);
+        // remove specials characters
+        $str = preg_replace('/[^a-zA-Z\']/', '', $str);
+        // remove spaces and convert to lowercase
+        return strtolower(preg_replace('/\s+/', '_', $str));
     }
 
 }

@@ -17,8 +17,7 @@ class AdminController extends BaseController
     public function admin(): Factory|View|Application
     {
         global $sidebar;
-        $sidebar->add_section('Dashboard');
-        $sidebar->add_menu('Home', 'Dashboard', '/');
+        $sidebar->add_section('Dashboard', 0)->add_menu('Home', 0, '/');
         return view('admin.index');
     }
 
