@@ -2,12 +2,36 @@
 
 namespace App\Helpers;
 
-class Section {
+use Exception;
 
-    public array $menus = [];
+class Section
+{
 
-    public function add_item(string $name_item, Menu $item) {
-        $this->menus[$name_item] = $item;
+    public SidebarInfo $info;
+
+    public function __construct(string $name, int $priority)
+    {
+        $this->info = new SidebarInfo($name, $priority);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function add_menu(string $name, int $priority = 99, string|false $path = false, bool $return_menu = true)
+    {
+        $title = Sidebar::parse($name);
+
+        if (property_exists($this, $title)) {
+            throw new Exception("Menu $name already exists!");
+        }
+
+        $this->{$title} = new Menu($name, $priority, $path);
+
+        if (!$return_menu) {
+            return $this;
+        }
+
+        return $this->{$title};
     }
 
 }
