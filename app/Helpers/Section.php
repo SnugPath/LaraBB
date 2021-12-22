@@ -7,31 +7,39 @@ use Exception;
 class Section
 {
 
+    private array $items = [];
     public SidebarInfo $info;
 
-    public function __construct(string $name, int $priority)
+    public function __construct(int $priority)
     {
-        $this->info = new SidebarInfo($name, $priority);
+        $this->info = new SidebarInfo($priority);
     }
 
     /**
      * @throws Exception
      */
-    public function add_menu(string $name, int $priority = 99, string|false $path = false, bool $return_menu = true)
+    public function addMenu(string $name, int $priority = 99, string|false $path = false, bool $returnMenu = true)
     {
-        $title = Sidebar::parse($name);
 
-        if (property_exists($this, $title)) {
+        if (array_key_exists($name, $this->items)) {
             throw new Exception("Menu $name already exists!");
         }
 
-        $this->{$title} = new Menu($name, $priority, $path);
+        $this->items[$name] = new Menu($priority, $path);
 
-        if (!$return_menu) {
+        if (!$returnMenu) {
             return $this;
         }
 
-        return $this->{$title};
+        return $this->items[$name];
+    }
+
+    function getMenu(string $name) {
+        if (!array_key_exists($name, $this->items)) {
+            return null;
+        }
+
+        return $this->items[$name];
     }
 
 }

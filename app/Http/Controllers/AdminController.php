@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Sidebar;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,10 +15,16 @@ class AdminController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    /**
+     * @throws \Exception
+     */
     public function admin(): Factory|View|Application
     {
-        global $sidebar;
-        $sidebar->add_section('Dashboard', 0)->add_menu('Home', 0, '/');
+        Sidebar::addSection('Dashboard', 0)
+            ->addMenu('Home', 0, '/', false)
+            ->addMenu('About', 1, '/')
+            ->addSubmenu('Contact', 0, '/');
+
         return view('admin.index');
     }
 
