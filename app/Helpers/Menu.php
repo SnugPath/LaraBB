@@ -34,7 +34,7 @@ class Menu
 
     }
 
-    function getSubmenu(string $name) {
+    function getSubmenu(string $name): Menu|null {
         if (!array_key_exists($name, $this->items)) {
             return null;
         }
