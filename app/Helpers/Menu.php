@@ -6,22 +6,21 @@ use Exception;
 
 class Menu
 {
-
+    private array $items = [];
     public SidebarInfo $info;
 
-    public function __construct(string $name, int $priority = 99, string|false $path = false)
+    public function __construct(int $priority = 99, string|false $path = false)
     {
-        $this->info = new SidebarInfo($name, $priority, $path);
+        $this->info = new SidebarInfo($priority, $path);
     }
 
     /**
      * @throws Exception
      */
-    public function add_submenu(string $name, int $priority = 99, string|false $path = false, bool $return_submenu = true)
+    public function addSubmenu(string $name, int $priority = 99, string|false $path = false): Menu
     {
-        $title = Sidebar::parse($name);
 
-        if (property_exists($this, $title)) {
+        if (array_key_exists($name, $this->items)) {
             throw new Exception("Submenu $name already exists!");
         }
 
@@ -29,14 +28,18 @@ class Menu
             throw new Exception('Submenus must contain a path!');
         }
 
-        $this->{$title} = new Menu($name, $priority ?? 99, $path);
+        $this->items[$name] = new Menu($priority ?? 99, $path);
 
-        if (!$return_submenu) {
-            return $this;
+        return $this;
+
+    }
+
+    function getSubmenu(string $name) {
+        if (!array_key_exists($name, $this->items)) {
+            return null;
         }
 
-        return $this->{$title};
-
+        return $this->items[$name];
     }
 
 }

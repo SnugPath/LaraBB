@@ -5,34 +5,36 @@ use Exception;
 
 class Sidebar {
 
+    private static array $items = [];
+
     /**
      * @throws Exception
      */
-    function add_section(string $name, int $priority = 0, bool $return_section = true) {
+    public static function addSection(string $name, int $priority = 99, bool $returnSection = true) {
 
-        $title = Sidebar::parse($name);
-
-        if (property_exists($this, $title)) {
+        if (array_key_exists($name, self::$items)) {
             throw new Exception("Section $name already exists!");
         }
 
-        $this->{$title} = new Section($name, $priority);
+        self::$items[$name] = new Section($priority);
 
-        if (!$return_section) {
-            return $this;
+        if (!$returnSection) {
+            return new self();
         }
 
-        return $this->{$title};
+        return self::$items[$name];
     }
 
-    public static function parse($str): string
-    {
-        // remove numbers
-        $str = preg_replace('/[0-9]+/', '', $str);
-        // remove specials characters
-        $str = preg_replace('/[^a-zA-Z\']/', '', $str);
-        // remove spaces and convert to lowercase
-        return strtolower(preg_replace('/\s+/', '_', $str));
+    public static function getSection(string $name) {
+        if (!array_key_exists($name, self::$items)) {
+            return null;
+        }
+
+        return self::$items[$name];
+    }
+
+    public static function render() {
+        return self::$items;
     }
 
 }
