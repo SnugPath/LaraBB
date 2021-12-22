@@ -5,7 +5,6 @@ namespace App\Helpers;
 class SidebarInfo
 {
 
-    public string $name;
     public int $priority;
     public string|false $path;
 

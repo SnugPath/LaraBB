@@ -18,7 +18,7 @@ class Section
     /**
      * @throws Exception
      */
-    public function addMenu(string $name, int $priority = 99, string|false $path = false, bool $returnMenu = true)
+    public function addMenu(string $name, int $priority = 99, string|false $path = false, bool $returnMenu = true):  Section|Menu
     {
 
         if (array_key_exists($name, $this->items)) {
@@ -34,7 +34,7 @@ class Section
         return $this->items[$name];
     }
 
-    function getMenu(string $name) {
+    function getMenu(string $name): Menu|null {
         if (!array_key_exists($name, $this->items)) {
             return null;
         }
