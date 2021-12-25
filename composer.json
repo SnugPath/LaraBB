@@ -28,7 +28,6 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/variables.php"
         ]
     },
     "autoload-dev": {
