@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <p id="times-clicked-counter">Times clicked: :(</p>
                         <button class="btn btn-primary" id="increment-count-button">Increment</button>
-                        {{ var_dump(\App\Helpers\Sidebar::render()) }}
+                        {{ var_dump(\App\Helpers\AdminMenu\Sidebar::render()) }}
                     </div>
                 </div>
             </div>
