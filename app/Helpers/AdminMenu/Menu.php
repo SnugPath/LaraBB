@@ -42,4 +42,8 @@ class Menu
         return $this->items[$name];
     }
 
+    function getAllSubmenus(): array {
+        return $this->items;
+    }
+
 }
