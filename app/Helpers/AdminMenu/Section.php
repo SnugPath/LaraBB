@@ -42,4 +42,8 @@ class Section
         return $this->items[$name];
     }
 
+    function getAllMenus(): array {
+        return $this->items;
+    }
+
 }

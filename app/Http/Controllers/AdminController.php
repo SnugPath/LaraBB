@@ -20,12 +20,9 @@ class AdminController extends BaseController
      */
     public function admin(): Factory|View|Application
     {
-        Sidebar::addSection('Dashboard', 0)
-            ->addMenu('Home', 0, '/', false)
-            ->addMenu('About', 1, '/')
-            ->addSubmenu('Contact', 0, '/');
-
-        return view('admin.index');
+        global $sidebar;
+        return view('admin.index')
+            ->with('sidebar', $sidebar);
     }
 
 }
