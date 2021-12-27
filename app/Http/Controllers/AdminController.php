@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AdminMenu\Sidebar;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,9 +15,14 @@ class AdminController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index()
+    /**
+     * @throws \Exception
+     */
+    public function admin(): Factory|View|Application
     {
-        return view('admin');
+        global $sidebar;
+        return view('admin.index')
+            ->with('sidebar', $sidebar);
     }
 
 }

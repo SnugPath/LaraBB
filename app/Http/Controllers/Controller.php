@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+require '../../variables.php';
+
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
