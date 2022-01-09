@@ -10,6 +10,74 @@
 
 @import '~bootstrap-icons/font/bootstrap-icons';
 
+a {
+    text-decoration: none!important;
+}
+
 #sidebar-nav {
     width: 260px;
+    background: #fe2c32;
+    color: #fff;
+
+    a {
+        color: #fff;
+    }
+
+    #app-logo {
+        text-align: center;
+        margin: 20px 20px 0;
+        font-size: 30px;
+    }
+
+    #sidebar-items {
+        padding: 0 30px;
+
+        .menu-separator {
+            height: 1px;
+            position: relative;
+            width: 100%;
+            background: #e61517;
+        }
+
+        .navbar-section {
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 0;
+
+            li {
+                list-style: none;
+                cursor: pointer;
+
+                &.navbar-menu {
+                    padding: 12px 15px;
+                    font-weight: 500;
+
+                    &.active {
+                        background: #fff;
+                        border-radius: 35px;
+                        a {
+                            color: #fe2c32;
+                        }
+                    }
+                }
+
+            }
+
+            .navbar-submenu {
+                padding: 7px 20px;
+                background: #e61517;
+                border-radius: 5px;
+            }
+
+        }
+
+    }
+}
+
+header {
+    line-height: 0;
 }

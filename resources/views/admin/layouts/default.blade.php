@@ -14,7 +14,12 @@
             <div class="col-auto px-0">
                 <div id="sidebar" class="collapse collapse-horizontal show border-end">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        {!! $sidebar->render(); !!}
+                        <div id="app-logo">
+                            LaraBB
+                        </div>
+                        <div id="sidebar-items">
+                            {!! $sidebar->render(); !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -37,7 +42,7 @@
             </main>
         </div>
     </div>
-    <script src="{{ mix('/js/app.js') }}"></script>
+{{--    <script src="{{ mix('/js/app.js') }}"></script>--}}
     <script src="{{ mix('/js/bootstrap.js') }}"></script>
 
 </body>

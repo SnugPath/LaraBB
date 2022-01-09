@@ -37,18 +37,19 @@ class Sidebar {
     {
         $menu = '';
         foreach ($this->items as $section_name => $section_data) {
-            $menu .= "<div class='section-$section_name'><span>$section_name</span>";
+            $menu .= "<div class='menu-separator my-4'></div><div class='section-$section_name'><div class='navbar-section'>$section_name</div>";
             if (!empty($section_data->getAllMenus())) {
                 $menu .= "<ul>";
                 foreach ($section_data->getAllMenus() as $menu_name => $menu_data) {
                     if (!empty($menu_data->getAllSubmenus())) {
-                        $menu .= "<li>$menu_name";
+                        $menu .= "<li class='navbar-menu' data-bs-toggle='collapse' data-bs-target='#$menu_name' aria-expanded='false' aria-controls='collapseExample' aria-controls='$menu_name'>$menu_name</li><div class='collapse' id='$menu_name'>";
                         foreach ($menu_data->getAllSubmenus() as $submenu_name => $submenu_data) {
-                            $menu .= "<div><a href='#'>$submenu_name</a></div>";
+                            $menu .= "<div class='navbar-submenu". (request()->is("admin".$submenu_data->info->path) ? ' active' : '') ."'><a href='/admin". $submenu_data->info->path ."'>$submenu_name</a></div>";
                         }
-                        $menu .= "</li>";
+                        $menu .= "</div>";
                     } else {
-                        $menu .= "<li><a href='#'>$menu_name</a></li>";
+                        $menu .= "<li class='navbar-menu". (request()->is("admin".$menu_data->info->path) ? ' active' : '') ."'><a href='/admin". $menu_data->info->path ."'>$menu_name</a></li>";
+
                     }
                 }
                 $menu .= "</ul>";

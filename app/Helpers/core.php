@@ -6,9 +6,9 @@ $GLOBALS['sidebar'] = $sidebar;
 try {
 
     $sidebar->addSection('Dashboard', 0)
-        ->addMenu('Home', 0, '/', false)
-        ->addMenu('About', 1, '/')
-        ->addSubmenu('Contact', 0, '/');
+        ->addMenu('Home', 0, '', false)
+        ->addMenu('About', 1)
+        ->addSubmenu('Contact', 0, '#');
 
     // TODO
 
