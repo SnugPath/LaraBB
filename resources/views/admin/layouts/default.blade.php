@@ -1,3 +1,4 @@
+{{ init_menu() }}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" theme="light">
 <head>
@@ -14,16 +15,14 @@
             <div class="col-auto px-0">
                 <div id="sidebar" class="collapse collapse-horizontal show border-end">
                     <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                        <div id="app-logo">
-                            LaraBB
-                        </div>
+                        <div id="app-logo">LaraBB</div>
                         <div id="sidebar-items">
                             {!! $sidebar->render(); !!}
                         </div>
                     </div>
                 </div>
             </div>
-            <main class="col ps-md-2 pt-2">
+            <main class="col ps-md-2 pt-2 pb-5">
                 <div class="container-fluid no-gutters p-0">
                     <div class="col-12">
                         <header class="ascent d-flex justify-content-between align-items-center">
@@ -38,6 +37,8 @@
                 <!-- START MAIN CONTENT -->
                 @yield('content')
                 <!-- END MAIN CONTENT -->
+
+                <div class="copyright">LaraBB v{{ config('app.version')  }} - Powered by Laravel v{{ app()->version() }}</div>
 
             </main>
         </div>

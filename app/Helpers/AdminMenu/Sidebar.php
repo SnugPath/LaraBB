@@ -42,7 +42,7 @@ class Sidebar {
                 $menu .= "<ul>";
                 foreach ($section_data->getAllMenus() as $menu_name => $menu_data) {
                     if (!empty($menu_data->getAllSubmenus())) {
-                        $menu .= "<li class='navbar-menu' data-bs-toggle='collapse' data-bs-target='#$menu_name' aria-expanded='false' aria-controls='collapseExample' aria-controls='$menu_name'>$menu_name</li><div class='collapse' id='$menu_name'>";
+                        $menu .= "<li class='navbar-menu collapsed' data-bs-toggle='collapse' data-bs-target='#$menu_name' aria-expanded='false' aria-controls='collapseExample' aria-controls='$menu_name'>$menu_name<i class='float-end bi bi-caret-down-fill'></i></li><div class='collapse collapsable' id='$menu_name'>";
                         foreach ($menu_data->getAllSubmenus() as $submenu_name => $submenu_data) {
                             $menu .= "<div class='navbar-submenu". (request()->is("admin".$submenu_data->info->path) ? ' active' : '') ."'><a href='/admin". $submenu_data->info->path ."'>$submenu_name</a></div>";
                         }
