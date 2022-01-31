@@ -25205,6 +25205,13 @@ a {
   padding: 12px 15px;
   font-weight: 500;
 }
+#sidebar-nav #sidebar-items ul li.navbar-menu i {
+  transform: rotate(180deg);
+  transition: 0.3s;
+}
+#sidebar-nav #sidebar-items ul li.navbar-menu.collapsed i {
+  transform: rotate(0);
+}
 #sidebar-nav #sidebar-items ul li.navbar-menu.active {
   background: #fff;
   border-radius: 35px;
@@ -25212,12 +25219,32 @@ a {
 #sidebar-nav #sidebar-items ul li.navbar-menu.active a {
   color: #fe2c32;
 }
-#sidebar-nav #sidebar-items ul .navbar-submenu {
-  padding: 7px 20px;
+#sidebar-nav #sidebar-items ul .collapsable {
+  padding: 0 20px;
   background: #e61517;
   border-radius: 5px;
+}
+#sidebar-nav #sidebar-items ul .collapsable .navbar-submenu {
+  font-weight: 500;
+  padding: 7px 0;
+}
+#sidebar-nav #sidebar-items ul .collapsable .navbar-submenu:first-child {
+  padding-top: 14px;
+}
+#sidebar-nav #sidebar-items ul .collapsable .navbar-submenu:last-child {
+  padding-bottom: 14px;
 }
 
 header {
   line-height: 0;
+}
+
+.copyright {
+  line-height: 4em;
+  position: absolute;
+  bottom: 0;
+  margin-left: 12px;
+  color: gray;
+  font-size: 13px;
+  font-style: italic;
 }

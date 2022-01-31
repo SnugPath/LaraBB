@@ -23,24 +23,7 @@ class HelperServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $path = realpath( app_path() . '/Helpers' );
-
-        $objects = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($path),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-
-        foreach($objects as $name => $object){
-            $path = $object->getRealPath();
-
-            if ($object->getFileName() == "." || $object->getFileName() == "..") {
-                continue;
-            }
-
-            if ($object->isFile()) {
-                require_once $path;
-            }
-        }
+        require_once realpath( app_path() . '/Helpers/core.php' );
     }
 
 }
