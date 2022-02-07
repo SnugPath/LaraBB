@@ -16,8 +16,9 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        global $sidebar;
+        global $sidebar, $hook;
         \Illuminate\Support\Facades\View::share('sidebar', $sidebar);
+        $hook->trigger('admin_menu');
     }
 
     /**

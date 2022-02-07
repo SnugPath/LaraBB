@@ -1,7 +1,8 @@
 <?php
-namespace App\Helpers\AdminMenu;
+namespace App\Helpers\Classes\AdminMenu;
 
 use Exception;
+use function request;
 
 class Sidebar {
 

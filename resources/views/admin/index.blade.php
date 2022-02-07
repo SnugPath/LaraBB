@@ -1,5 +1,5 @@
 @extends('admin.layouts.default')
-@section('title', 'LaraBB — Dashboard')
+@section('title', 'Dashboard')
 @section('content')
 
     <div class="container">
