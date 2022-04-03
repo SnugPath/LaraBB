@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-header">Example Component</div>
                     <div class="card-body">
-                        <p id="times-clicked-counter">Times clicked: :(</p>
+                        <p id="times-clicked-counter">Your name is </p>
                         <button class="btn btn-primary" id="increment-count-button">Increment</button>
                     </div>
                 </div>
