@@ -1,0 +1,14 @@
+@import "root";
+@import "~bootstrap/scss/bootstrap";
+
+
+.ascent {
+    background-color: $card-bg;
+    border: 1px solid $card-border-color;
+    border-radius: $card-border-radius;
+}
+
+header {
+    padding: 20px;
+    margin: 20px 20px 40px;
+}

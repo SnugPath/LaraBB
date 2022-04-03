@@ -11,7 +11,7 @@ const defaultLayout = "default";
 
 export default {
     computed: {
-        layout() {
+        layout(): string {
             return (this.$route.meta.layout || defaultLayout) + '-layout';
         }
     }

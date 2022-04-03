@@ -4,13 +4,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Example Component</div>
-
                     <div class="card-body">
-                        I'm an example component.
-                    </div>
-                    <div>
                         <p id="times-clicked-counter">Times clicked: {{ count }}</p>
-                        <button @click="increment" id="increment-count-button">increment</button>
+                        <button @click="increment" class="btn btn-primary" id="increment-count-button">increment</button>
                     </div>
                 </div>
             </div>

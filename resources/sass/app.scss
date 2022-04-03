@@ -4,5 +4,113 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Themes
+@import "themes/light";
+@import "themes/dark";
+
+@import '~bootstrap-icons/font/bootstrap-icons';
+
+a {
+    text-decoration: none!important;
+}
+
+#sidebar-nav {
+    width: 260px;
+    background: #fe2c32;
+    color: #fff;
+
+    a {
+        color: #fff;
+    }
+
+    #app-logo {
+        text-align: center;
+        margin: 20px 20px 0;
+        font-size: 30px;
+    }
+
+    #sidebar-items {
+        padding: 0 30px;
+
+        .menu-separator {
+            height: 1px;
+            position: relative;
+            width: 100%;
+            background: #e61517;
+        }
+
+        .navbar-section {
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 0;
+
+            li {
+                list-style: none;
+                cursor: pointer;
+
+                &.navbar-menu {
+                    padding: 12px 15px;
+                    font-weight: 500;
+
+                    i {
+                        transform: rotate(180deg);
+                        transition: .3s;
+                    }
+
+                    &.collapsed i {
+                        transform: rotate(0);
+                    }
+
+                    &.active {
+                        background: #fff;
+                        border-radius: 35px;
+                        a {
+                            color: #fe2c32;
+                        }
+                    }
+                }
+
+            }
+
+            .collapsable {
+                padding: 0 20px;
+                background: #e61517;
+                border-radius: 5px;
+
+                .navbar-submenu {
+                    font-weight: 500;
+                    padding: 7px 0;
+
+                    &:first-child {
+                        padding-top: 14px;
+                    }
+
+                    &:last-child {
+                        padding-bottom: 14px;
+                    }
+                }
+
+            }
+
+        }
+
+    }
+}
+
+header {
+    line-height: 0;
+}
+
+.copyright {
+    line-height: 4em;
+    position: absolute;
+    bottom: 0;
+    margin-left: 12px;
+    color: gray;
+    font-size: 13px;
+    font-style: italic;
+}
