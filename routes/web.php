@@ -22,8 +22,14 @@ Route::get('language/{locale}', function ($locale) {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(App\Http\Middleware\AdminShare::class)->group(function () {
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin']);
-});
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware([
+    'auth',
+    'admin.share',
+    'user.type.is:1'
+])->group(function () {
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin']);
+});
