@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -13,16 +14,8 @@ class AdminController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
-    public function __construct()
-    {
-        global $sidebar, $hook;
-        \Illuminate\Support\Facades\View::share('sidebar', $sidebar);
-        $hook->trigger('admin_menu');
-    }
-
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function admin(): Factory|View|Application
     {
