@@ -14,6 +14,15 @@ a {
     text-decoration: none!important;
 }
 
+.center-error {
+    text-align: center;
+    margin-top: 100px;
+    line-height: 0.4;
+    font-style: italic;
+    color: gray;
+    font-size: 20px;
+}
+
 #sidebar-nav {
     width: 260px;
     background: #fe2c32;

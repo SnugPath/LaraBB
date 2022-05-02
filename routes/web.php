@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ForumController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware([
     'auth',
-    'admin.share',
     'user.type.is:1'
 ])->group(function () {
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'admin']);
+    Route::get('/admin', [DashboardController::class, 'admin']);
+    Route::get('/admin/categories', [ForumController::class, 'categories']);
 });
