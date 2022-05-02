@@ -48,4 +48,9 @@ class Forum extends Model
     public function subscribed_users() {
         return $this->belongsToMany(User::class, 'forums_subscriptions', 'forum_id', 'user_id');
     }
+
+    public function get_categories() {
+        return Forum::where('type', 0)->get();
+    }
+
 }
