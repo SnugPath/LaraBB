@@ -9,29 +9,39 @@ use App\Repositories\Interfaces\GroupRepositoryInterface;
 class GroupRepository extends BaseRepository implements GroupRepositoryInterface
 {
     protected $model;
+    private $default_color = '000000';
+    private $default_image = '';
 
     public function __construct(Group $group)
     {
         parent::__construct($group);
     }
 
-    public function create(GroupDto $group): Group
+    public function create(GroupDto $group): GroupDto
     {
-        $created_group = new $this->model();
-        $created_group->name = $group->name;
-        $created_group->desc = $group->desc;
-        $created_group->display = $group->display;
-        $created_group->img = $group->img;
-        $created_group->color = $group->color;
+        $created_group = $this->model->create([
+            'name' => $group->name,
+            'desc' => $group->desc,
+            'display' => $group->display,
+            'img' => isset($group->img) ? $group->img : $this->default_image,
+            'color' => isset($group->color)? $group->color : $this->default_color
+        ]);
 
-        $created_group->save();
+        $response_dto = new GroupDto();
+        $response_dto->id = $created_group->id;
+        $response_dto->name = $created_group->name;
+        $response_dto->desc = $created_group->desc;
+        $response_dto->display = $created_group->display;
+        $response_dto->img = $created_group->img;
+        $response_dto->color = $created_group->color;
 
-        return $created_group;
+
+        return $response_dto;
     }
 
     public function group_exists($id): bool
     {
         $group = $this->model->find($id);
-        return $group !== null;
+        return !is_null($group);
     }
 }

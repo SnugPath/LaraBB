@@ -10,16 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class RankRepositoryTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $this->assertTrue(true);
-    }
-
     private $rank_model_mock;
     private $created_rank_model_mock;
     private $group_repository_mock;
@@ -28,6 +18,7 @@ class RankRepositoryTest extends TestCase
     private $created_mock_id = 55;
     private $valid_rank_id = 1;
     private $invalid_rank_id = 2;
+    private $rank_name = "foo";
 
     public function tearDown(): void
     {
@@ -43,12 +34,22 @@ class RankRepositoryTest extends TestCase
 
     private function setup_models()
     {
+        /** @var \Mockery\Mock */
         $this->rank_model_mock = Mockery::mock('App\Models\Rank');
+        /** @var \Mockery\Mock */
         $this->created_rank_model_mock = Mockery::mock('App\Models\Rank');
         $this->created_rank_model_mock
             ->shouldReceive('getAttribute')
             ->with('id')
             ->andReturn($this->created_mock_id);
+        $this->created_rank_model_mock
+            ->shouldReceive('getAttribute')
+            ->with('name')
+            ->andReturn($this->rank_name);
+        $this->created_rank_model_mock
+            ->shouldReceive('getAttribute')
+            ->with('group_id')
+            ->andReturn($this->valid_group_id);
         $this->rank_model_mock
             ->shouldReceive('create')
             ->andReturn($this->created_rank_model_mock);
@@ -67,6 +68,7 @@ class RankRepositoryTest extends TestCase
 
     private function setup_repositories()
     {
+        /** @var \Mockery\Mock */
         $this->group_repository_mock = Mockery::mock('App\Repositories\Interfaces\GroupRepositoryInterface');
         $this->group_repository_mock
             ->shouldReceive('group_exists')
