@@ -2,8 +2,6 @@
 
 namespace App\Dto;
 
-use Carbon\Carbon;
-
 class RankDto
 {
     public int $id;

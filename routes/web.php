@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ForumController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\RankController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,10 +30,15 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware([
-    'auth',
-    'user.type.is:1'
-])->group(function () {
-    Route::get('/admin', [DashboardController::class, 'admin']);
-    Route::get('/admin/categories', [ForumController::class, 'categories']);
+Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], function () {
+    Route::get('/', [DashboardController::class, 'admin']);
+    Route::get('/categories', [ForumController::class, 'categories']);
+
+    Route::group(['prefix' => 'group'], function() {
+        Route::post('/', [GroupController::class, 'create_group']);
+    });
+    
+    Route::group(['prefix' => 'rank'], function() {
+        Route::post('/', [RankController::class, 'create_rank']);
+    });    
 });

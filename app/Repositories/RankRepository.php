@@ -24,7 +24,7 @@ class RankRepository extends BaseRepository implements RankRepositoryInterface
     /**
      * @throws ModelNotFoundException when an invalid group id is passed.
      */
-    public function create(RankDto $rank): Rank
+    public function create(RankDto $rank): RankDto
     {
         $valid_group = $this->group_repository->group_exists($rank->group_id);
         if(!$valid_group)
@@ -37,7 +37,12 @@ class RankRepository extends BaseRepository implements RankRepositoryInterface
             'name' => $rank->name
         ]);
 
-        return $created_rank;
+        $dto = new RankDto();
+        $dto->id = $created_rank->id;
+        $dto->name = $created_rank->name;
+        $dto->group_id = $created_rank->group_id;
+
+        return $dto;
     }
 
     public function rank_exists($rank_id): bool
