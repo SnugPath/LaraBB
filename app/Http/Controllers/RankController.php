@@ -31,7 +31,7 @@ class RankController extends Controller
         {
             return $this->return_json_response(400, ["error" => "A rank name is required"]);
         }
-        
+
         $group_exists = isset($data['group_id']) ?
             $this->group_repository->group_exists($data['group_id'])
             : false;
@@ -45,14 +45,18 @@ class RankController extends Controller
         $dto->name = $data['name'];
         $dto->group_id = $data['group_id'];
 
+        $code = 200;
+        $data = [];
         try
         {
             $created_rank = $this->rank_repository->create($dto);
-            return $this->return_json_response(200, ["rank" => $created_rank]);
+            $data = ["rank" => $created_rank];
         }
         catch(Exception $ex)
         {
-            return $this->return_json_response(500, ["error" => "Error creating rank"]);
+            $code = 500;
+            $data = ["error" => "Error creating rank"];
         }
+        return $this->return_json_response($code, $data);
     }
 }

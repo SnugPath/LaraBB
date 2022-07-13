@@ -21,7 +21,9 @@ class RankControllerTest extends TestCase
     private $created_mock_id = 55;
     private $valid_rank_id = 1;
     private $invalid_rank_id = 2;
-    private $rank_name = "foo";
+    private $rank_name = 'foo';
+    private $controller_url = '/admin/rank';
+    private $rank_required_error = 'A rank name is required';
 
     public function tearDown(): void
     {
@@ -31,11 +33,11 @@ class RankControllerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->setup_models();
-        $this->setup_repositories();
+        $this->setup_required_models();
+        $this->setup_required_repositories();
     }
 
-    private function setup_models()
+    private function setup_required_models()
     {
         /** @var \Mockery\Mock */
         $this->rank_model_mock = Mockery::mock('App\Models\Rank');
@@ -69,7 +71,7 @@ class RankControllerTest extends TestCase
             ->andReturn(null);
     }
 
-    private function setup_repositories()
+    private function setup_required_repositories()
     {
         /** @var \Mockery\Mock */
         $this->group_repository_mock = Mockery::mock('App\Repositories\Interfaces\GroupRepositoryInterface');
@@ -89,13 +91,13 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', []);
+            ->postJson($this->controller_url, []);
  
         $response
             ->assertStatus(400)
             ->assertJson([
                 "code" => 400,
-                "error" => "A rank name is required"
+                "error" => $this->rank_required_error
             ]);
         
     }
@@ -106,13 +108,13 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', ['name' => '']);
+            ->postJson($this->controller_url, ['name' => '']);
  
         $response
             ->assertStatus(400)
             ->assertJson([
                 "code" => 400,
-                "error" => "A rank name is required"
+                "error" => $this->rank_required_error
             ]);
         
     }
@@ -123,13 +125,13 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', ['name' => '    ']);
+            ->postJson($this->controller_url, ['name' => '    ']);
  
         $response
             ->assertStatus(400)
             ->assertJson([
                 "code" => 400,
-                "error" => "A rank name is required"
+                "error" => $this->rank_required_error
             ]);
         
     }
@@ -140,7 +142,7 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', ['name' => 'Foo']);
+            ->postJson($this->controller_url, ['name' => 'Foo']);
  
         $response
             ->assertStatus(400)
@@ -160,7 +162,7 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', ['name' => 'Foo', 'group_id' => $this->invalid_group_id]);
+            ->postJson($this->controller_url, ['name' => 'Foo', 'group_id' => $this->invalid_group_id]);
  
         $response
             ->assertStatus(400)
@@ -180,7 +182,7 @@ class RankControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/rank', ['name' => 'Foo', 'group_id' => $this->valid_group_id]);
+            ->postJson($this->controller_url, ['name' => 'Foo', 'group_id' => $this->valid_group_id]);
  
         $response
             ->assertStatus(200)

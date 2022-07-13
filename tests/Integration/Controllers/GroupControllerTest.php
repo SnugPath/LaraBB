@@ -13,6 +13,7 @@ class GroupControllerTest extends TestCase
     private $group_model_mock;
     private $created_group_model_mock;
     private $group_repository_mock;
+    private $controller_url = '/admin/group';
 
     public function tearDown(): void
     {
@@ -75,7 +76,7 @@ class GroupControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/group', ['description' => "foo"]);
+            ->postJson($this->controller_url, ['description' => "foo"]);
  
         $response
             ->assertStatus(400)
@@ -92,7 +93,7 @@ class GroupControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/group', ['name' => 'foo']);
+            ->postJson($this->controller_url, ['name' => 'foo']);
  
         $response
             ->assertStatus(400)
@@ -113,7 +114,7 @@ class GroupControllerTest extends TestCase
         $response = $this
             ->withoutExceptionHandling()
             ->actingAs($user)
-            ->postJson('/admin/group', ['name' => $valid_group->name, 'description' => $valid_group->desc]);
+            ->postJson($this->controller_url, ['name' => $valid_group->name, 'description' => $valid_group->desc]);
 
         $response
             ->assertJson(
