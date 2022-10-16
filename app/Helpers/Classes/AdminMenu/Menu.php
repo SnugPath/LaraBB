@@ -17,14 +17,14 @@ class Menu
     /**
      * @throws Exception
      */
-    public function addSubmenu(string $name, int $priority = 99, string|false $path = false): Menu
+    public function addSubmenu(string $name, int $priority = 99, string $path = ''): Menu
     {
 
         if (array_key_exists($name, $this->items)) {
             throw new Exception("Submenu $name already exists!");
         }
 
-        if (!$path) {
+        if (empty($path)) {
             throw new Exception('Submenus must contain a path!');
         }
 

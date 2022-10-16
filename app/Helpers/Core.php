@@ -5,6 +5,10 @@ namespace App\Helpers;
 use App\Helpers\Classes\AdminMenu\Sidebar;
 use App\Helpers\Classes\Hooks;
 
+/*
+ * LaraBB's core class. It is the first class to be loaded after the Laravel foundation. In this class, the other
+ * classes necessary for the operation of LaraBB are started. Themes and plugins are also loaded.
+ */
 class Core
 {
 
@@ -16,7 +20,13 @@ class Core
 
         self::$sidebar = new Sidebar();
         self::$hook = new Hooks();
+        self::addSidebar();
+        self::loadPlugins();
+        self::loadTheme();
+    }
 
+    private static function addSidebar(): void
+    {
         self::$hook->add('admin_menu', function () {
             self::$sidebar->addSection(__('dashboard_menu.dashboard'), 0)
                 ->addMenu(__('dashboard_menu.home'), 0, '', false)
@@ -56,6 +66,9 @@ class Core
                 ->addSubmenu(__('dashboard_menu.import_export'), 0, 'import')
                 ->addSubmenu(__('dashboard_menu.site_health'), 0, 'site-health');
         });
-
     }
+
+    private static function loadPlugins(): void {}
+
+    private static function loadTheme(): void {}
 }
