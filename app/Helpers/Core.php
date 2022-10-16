@@ -4,8 +4,9 @@ namespace App\Helpers;
 
 use App\Helpers\Classes\AdminMenu\Sidebar;
 use App\Helpers\Classes\Hooks;
+use Exception;
 
-/*
+/**
  * LaraBB's core class. It is the first class to be loaded after the Laravel foundation. In this class, the other
  * classes necessary for the operation of LaraBB are started. Themes and plugins are also loaded.
  */
@@ -68,7 +69,21 @@ class Core
         });
     }
 
-    private static function loadPlugins(): void {}
+    /**
+     * @return void
+     */
+    private static function loadPlugins(): void
+    {
+        // TODO: loadPlugins
+        return;
+    }
 
-    private static function loadTheme(): void {}
+    /**
+     * @return void
+     */
+    private static function loadTheme(): void
+    {
+        // TODO: loadTheme
+        return;
+    }
 }
