@@ -5,26 +5,26 @@ namespace App\Helpers\Classes;
 class Hooks
 {
 
-    protected static array $events = array();
+    protected array $events = array();
 
-    public static function add(string $name, callable|string $callback): void
+    public function add(string $name, callable|string $callback): void
     {
-        if (!isset(self::$events[$name])) self::$events[$name] = array();
-        self::$events[$name][] = $callback;
+        if (!isset($this->events[$name])) $this->events[$name] = array();
+        $this->events[$name][] = $callback;
     }
 
-    public static function trigger(string $name, $data = null): void
+    public function trigger(string $name, $data = null): void
     {
-        if (!isset(self::$events[$name])) return;
-        foreach (self::$events[$name] as $callback) {
+        if (!isset($this->events[$name])) return;
+        foreach ($this->events[$name] as $callback) {
             $callback($name, $data);
         }
-        self::remove($name);
+        $this->remove($name);
     }
 
-    public static function remove(string $name): void
+    public function remove(string $name): void
     {
-        unset(self::$events[$name]);
+        unset($this->events[$name]);
     }
 
 }
