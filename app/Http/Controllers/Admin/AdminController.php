@@ -14,7 +14,8 @@ class AdminController
         $this->share(
             array(
                 'sidebar' => Core::$sidebar,
-                'hook' => $hook
+                'hook' => $hook,
+                'user' => auth()->user()
             )
         );
         $hook->trigger('admin_menu');
