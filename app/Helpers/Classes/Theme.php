@@ -5,39 +5,49 @@ namespace App\Helpers\Classes;
 use App\Helpers\Classes\AdminMenu\Menu;
 use App\Helpers\Classes\AdminMenu\Section;
 use App\Helpers\Classes\AdminMenu\Sidebar;
-use App\Helpers\Core;
 use Exception;
 
-/**
- * Base class for plugins and themes. It is an abstract helper class for developers, with pre-made functions for
- * optimization and more intuitive flow when developing themes and plugins.
- */
-abstract class Base
+abstract class Theme
 {
 
-    /**
-     * This init method will be called by LaraBB when the plugin/theme is loaded.
-     * @return void
-     */
-    abstract public static function onLoad(): void;
+    private readonly Hook $hook;
+    private readonly Sidebar $sidebar;
+
+    public function __construct(Hook $hook, Sidebar $sidebar)
+    {
+        $this->hook = $hook;
+        $this->sidebar = $sidebar;
+    }
 
     /**
-     * The onActivate method will be called every time the plugin/theme is activated.
+     * This init method will be called by LaraBB when the theme is installed.
      * @return void
      */
-    abstract public static function onActivate(): void;
+    abstract public function onInstall(): void;
 
     /**
-     * The onUpdate method will be called every time the plugin/theme is updated.
+     * This init method will be called by LaraBB when the theme is loaded.
      * @return void
      */
-    abstract public static function onUpdate(): void;
+    abstract public function onLoad(): void;
 
     /**
-     * The onDeactivate method will be called every time the plugin/theme is deactivated.
+     * The onUpdate method will be called every time the theme is updated.
      * @return void
      */
-    abstract public static function onDeactivate(): void;
+    abstract public function onUpdate(): void;
+
+    /**
+     * The onActivate method will be called every time the theme is activated.
+     * @return void
+     */
+    abstract public function onActivate(): void;
+
+    /**
+     * The onDeactivate method will be called every time the theme is deactivated.
+     * @return void
+     */
+    abstract public function onDeactivate(): void;
 
     /**
      * The addHook method is a quick and intuitive function to add a hook
@@ -45,9 +55,9 @@ abstract class Base
      * @param callable|string $callback The function that will be called when the hook is called
      * @return void
      */
-    protected static function addHook(string $name, callable|string $callback): void
+    protected function addHook(string $name, callable|string $callback): void
     {
-        Core::$hook->add($name, $callback);
+        $this->hook->add($name, $callback);
     }
 
     /**
@@ -55,9 +65,9 @@ abstract class Base
      * @param string $name The hook name
      * @return void
      */
-    protected static function removeHook(string $name): void
+    protected function removeHook(string $name): void
     {
-        Core::$hook->remove($name);
+        $this->hook->remove($name);
     }
 
     /**
@@ -65,9 +75,9 @@ abstract class Base
      * @param string $name Section name
      * @return Section|null
      */
-    protected static function getSection(string $name): Section|null
+    protected function getSection(string $name): Section|null
     {
-        return Core::$sidebar->getSection($name);
+        return $this->sidebar->getSection($name);
     }
 
     /**
@@ -78,9 +88,9 @@ abstract class Base
      * @return Section|Sidebar
      * @throws Exception
      */
-    protected static function addSection(string $name, int $priority = 99, bool $returnSection = true): Section|Sidebar
+    protected function addSection(string $name, int $priority = 99, bool $returnSection = true): Section|Sidebar
     {
-        return Core::$sidebar->addSection($name, $priority, $returnSection);
+        return $this->sidebar->addSection($name, $priority, $returnSection);
     }
 
     /** Get a specific menu filtered by Section name and its name
@@ -88,9 +98,9 @@ abstract class Base
      * @param string $menuName Menu name
      * @return Menu
      */
-    protected static function getMenu(string $sectionName, string $menuName): Menu
+    protected function getMenu(string $sectionName, string $menuName): Menu
     {
-        return self::getSection($sectionName)->getMenu($menuName);
+        return $this->getSection($sectionName)->getMenu($menuName);
     }
 
     /** Add a menu to a specific section
@@ -103,7 +113,7 @@ abstract class Base
      * @return Section|Menu If is true, return the created Menu, otherwise return the Section
      * @throws Exception
      */
-    protected static function addMenu(
+    protected function addMenu(
         string $sectionName,
         string $menuName,
         int $priority = 99,
@@ -111,7 +121,7 @@ abstract class Base
         bool $returnMenu = true
     ): Section|Menu
     {
-        return self::getSection($sectionName)->addMenu($menuName, $priority, $path, $returnMenu);
+        return $this->getSection($sectionName)->addMenu($menuName, $priority, $path, $returnMenu);
     }
 
     /**
@@ -124,7 +134,7 @@ abstract class Base
      * @return Menu
      * @throws Exception
      */
-    protected static function addSubmenu(
+    protected function addSubmenu(
         string $sectionName,
         string $menuName,
         string $submenuName,
@@ -132,7 +142,7 @@ abstract class Base
         string $path = ''
     ): Menu
     {
-        return self::getMenu($sectionName, $menuName)->addSubmenu($submenuName, $priority, $path);
+        return $this->getMenu($sectionName, $menuName)->addSubmenu($submenuName, $priority, $path);
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Classes;
 
-class Hooks
+class Hook
 {
 
     protected array $events = array();
