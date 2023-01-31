@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Core;
+use App\Helpers\Classes\AdminMenu\Sidebar;
+use App\Helpers\Classes\Hook;
 use Illuminate\Support\Facades\View;
 
 class AdminController
 {
 
-    public function __construct()
+    public function __construct(Sidebar $sidebar, Hook $hook)
     {
-        $hook = Core::$hook;
         $this->share(
             array(
-                'sidebar' => Core::$sidebar,
+                'sidebar' => $sidebar,
                 'hook' => $hook,
                 'user' => auth()->user()
             )
         );
-        $hook->trigger('admin_menu');
     }
 
-    private function share($variables): void {
+    private function share(array $variables): void {
         foreach ($variables as $name => $var) {
             View::share($name, $var);
         }
