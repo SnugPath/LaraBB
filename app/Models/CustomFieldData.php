@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CustomFieldData extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = "custom_field_data";
 
     protected $fillable = [
