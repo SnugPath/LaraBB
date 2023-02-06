@@ -16,7 +16,7 @@ class CustomFieldDto
     public Carbon $created_at;
     public Carbon $updated_at;
 
-    static function fromModel(CustomField $custom_field): CustomFieldDto
+    public static function fromModel(CustomField $custom_field): CustomFieldDto
     {
         $dto = new CustomFieldDto();
         $dto->id = $custom_field->id;
