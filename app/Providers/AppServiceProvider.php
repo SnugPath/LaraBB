@@ -34,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\RankRepositoryInterface::class,
             \App\Repositories\RankRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldRepositoryInterface::class,
+            \App\Repositories\CustomFieldRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface::class,
+            \App\Repositories\CustomFieldTypeRepository::class
+        );
     }
 
     /**

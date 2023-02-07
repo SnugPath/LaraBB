@@ -2,15 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Dto\CustomFieldDataDto;
 use App\Dto\CustomFieldTypeDto;
-use App\Exceptions\CustomField\InvalidCustomFieldException;
 use App\Models\CustomFieldType;
 use App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface;
 
 class CustomFieldTypeRepository extends BaseRepository implements CustomFieldTypeRepositoryInterface
 {
-    protected CustomFieldType $model;
+    protected $model;
 
     public function __construct(
         CustomFieldType $custom_field_type

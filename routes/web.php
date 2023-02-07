@@ -44,6 +44,6 @@ Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], f
     });
 
     Route::group(['prefix' => 'custom-field'], function() {
-       Route::post('/', [CustomFieldController::class, 'createCustomField']);
+       Route::post('/', [CustomFieldController::class, 'createCustomField'])->name('createCustomField');
     });
 });

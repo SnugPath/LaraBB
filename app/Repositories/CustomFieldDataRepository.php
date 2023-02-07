@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Dto\CustomFieldDataDto;
-use App\Dto\CustomFieldDto;
 use App\Exceptions\CustomField\InvalidCustomFieldException;
 use App\Models\CustomFieldData;
 use App\Repositories\Interfaces\CustomFieldDataRepositoryInterface;
@@ -11,7 +10,7 @@ use App\Repositories\Interfaces\CustomFieldRepositoryInterface;
 
 class CustomFieldDataRepository extends BaseRepository implements CustomFieldDataRepositoryInterface
 {
-    protected CustomFieldData $model;
+    protected $model;
     private CustomFieldRepositoryInterface $custom_field_repository;
 
     public function __construct(
