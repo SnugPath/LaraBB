@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CustomField extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = "custom_field";
 
     protected $fillable = [
+        'name',
         'type',
         'default',
         'required',

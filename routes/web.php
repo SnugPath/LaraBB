@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ForumController;
+use App\Http\Controllers\CustomFieldController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\RankController;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,12 @@ Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], f
     Route::group(['prefix' => 'group'], function() {
         Route::post('/', [GroupController::class, 'create_group']);
     });
-    
+
     Route::group(['prefix' => 'rank'], function() {
         Route::post('/', [RankController::class, 'create_rank']);
-    });    
+    });
+
+    Route::group(['prefix' => 'custom-field'], function() {
+       Route::post('/', [CustomFieldController::class, 'createCustomField'])->name('createCustomField');
+    });
 });
