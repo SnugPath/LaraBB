@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Helpers\Classes\AdminMenu\Sidebar;
 use App\Helpers\Classes\Hook;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
@@ -65,6 +66,8 @@ class CoreServiceProvider extends ServiceProvider
             return new Hook();
         });
 
+        $this->app->singleton(\App\Helpers\Classes\PluginManager::class);
+
     }
 
     /**
@@ -74,7 +77,10 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $plugin_manager = $this->app->make(\App\Helpers\Classes\PluginManager::class);
+        $plugin_manager->setDirectory(base_path() . "/app/Plugins");
+        $plugin_manager->loadPlugins();
+        $plugin_manager->callPluginLoadMethod();
     }
 
 }

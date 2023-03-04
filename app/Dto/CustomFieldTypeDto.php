@@ -9,7 +9,7 @@ class CustomFieldTypeDto
 {
     public int $id;
     public string $name;
-    public string $description;
+    public ?string $description;
     public Carbon $created_at;
     public Carbon $updated_at;
 
