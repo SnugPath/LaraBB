@@ -26,10 +26,10 @@ class CoreServiceProvider extends ServiceProvider
                 ->addMenu(__('dashboard_menu.statistics'), 3, '/statistics');
 
             $sidebar->addSection(__('dashboard_menu.design'), 1)
-                ->addMenu(__('dashboard_menu.themes'), 0, '')
-                ->addSubmenu(__('dashboard_menu.installed_themes'), 0, '/themes')
+                ->addMenu(__('dashboard_menu.theme'), 0, '')
+                ->addSubmenu(__('dashboard_menu.installed_themes'), 0, '/theme')
                 ->addSubmenu(__('dashboard_menu.add_new_theme'), 1, '/widgets')
-                ->addSubmenu(__('dashboard_menu.edit_themes'), 2, '/edit-themes');
+                ->addSubmenu(__('dashboard_menu.edit_themes'), 2, '/edit-theme');
 
             $sidebar->getSection(__('dashboard_menu.design'))
                 ->addMenu(__('dashboard_menu.plugins'), 0, '')

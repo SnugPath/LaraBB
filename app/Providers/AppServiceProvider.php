@@ -42,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface::class,
             \App\Repositories\CustomFieldTypeRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\ConfigRepositoryInterface::class,
+            \App\Repositories\ConfigRepository::class
+        );
     }
 
     /**

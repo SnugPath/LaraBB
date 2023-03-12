@@ -30,6 +30,8 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
+Route::get('/home/foo', [App\Http\Controllers\HomeController::class, 'foo'])->name('foo');
 
 Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'admin']);

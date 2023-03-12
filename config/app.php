@@ -200,6 +200,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\CoreServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        App\Providers\ThemeServiceProvider::class
 
     ],
 

@@ -25,4 +25,14 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function dashboard()
+    {
+        return view('theme.dashboard');
+    }
+
+    public function foo()
+    {
+        return view('theme.foo');
+    }
 }
