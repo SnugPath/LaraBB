@@ -10,7 +10,6 @@ class LaraError
 
     public function __construct(string $code, string $message)
     {
-        if (empty($code)) return;
         $this->code = $code;
         $this->message = $message;
         $this->Add($code, $message);

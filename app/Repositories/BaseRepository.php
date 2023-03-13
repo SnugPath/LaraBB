@@ -17,7 +17,7 @@ class BaseRepository implements BaseRepositoryInterface
     public function find($id)
     {
         $element = $this->model->find($id);
-        if ($element == null) 
+        if ($element == null)
         {
             throw new ModelNotFoundException("Model not found");
         }
