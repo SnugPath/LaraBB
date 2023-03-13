@@ -14,4 +14,10 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
     {
         parent::__construct($forum);
     }
+
+    public function forum_exists(int $id): bool
+    {
+        $forum = $this->model->find($id);
+        return !is_null($forum);
+    }
 }

@@ -40,12 +40,21 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
             throw new ModelNotFoundException('Invalid user id for author passed');
         }
 
-        return $this->model->create([
+        $created_post = $this->model->create([
             'topic_id' => $post->topic_id,
             'author' => $post->author,
             'approved' => $post->approved,
             'content' => $post->content
         ]);
+
+        $dto = new PostDto();
+        $dto->id = $created_post->id;
+        $dto->topic_id = $created_post->topic_id;
+        $dto->author = $created_post->author;
+        $dto->approved = $created_post->approved;
+        $dto->content = $created_post->content;
+
+        return $dto;
 
     }
 
