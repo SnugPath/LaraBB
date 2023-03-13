@@ -11,4 +11,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         parent::__construct($user);
     }
+
+    public function user_exists($id): bool
+    {
+        $user = $this->model->find($id);
+        return !is_null($user);
+    }
+
 }

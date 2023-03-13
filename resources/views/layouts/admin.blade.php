@@ -33,6 +33,8 @@
                     </div>
                 </div>
 
+                {{ $hook->trigger("admin_messages") }}
+
                 <!-- START MAIN CONTENT -->
                 @yield('content')
                 <!-- END MAIN CONTENT -->
