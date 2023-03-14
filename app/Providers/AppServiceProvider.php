@@ -27,6 +27,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\ForumRepository::class
         );
         $this->app->bind(
+            \App\Repositories\Interfaces\TopicRepositoryInterface::class,
+            \App\Repositories\TopicRepository::class,
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\PostRepositoryInterface::class,
+            \App\Repositories\PostRepository::class,
+        );
+        $this->app->bind(
             \App\Repositories\Interfaces\GroupRepositoryInterface::class,
             \App\Repositories\GroupRepository::class
         );

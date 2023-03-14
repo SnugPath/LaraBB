@@ -2,6 +2,8 @@
 
 namespace App\Dto;
 
+use Carbon\Carbon;
+
 class TopicDto
 {
     public int $id;
@@ -12,7 +14,7 @@ class TopicDto
     public int $views;
     public int $status;
     public int $type;
-    public string $created_at;
-    public string $updated_at;
+    public Carbon $created_at;
+    public Carbon $updated_at;
 
 }
