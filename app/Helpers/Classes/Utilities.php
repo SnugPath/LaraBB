@@ -1,9 +1,4 @@
-<?php /** @noinspection CssMissingComma */
-/** @noinspection CssInvalidHtmlTagReference */
-/** @noinspection RequiredAttributes */
-/** @noinspection HtmlRequiredAltAttribute */
-
-/** @noinspection HtmlUnknownTarget */
+<?php
 
 namespace App\Helpers\Classes;
 
