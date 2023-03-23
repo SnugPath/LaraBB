@@ -61,6 +61,75 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
         return $dto;
 
     }
+    public function find_by_parent_id(int $parent_id, int $per_page = 10): array
+    {
+        $forums = $this->model->where('parent', $parent_id)->paginate($per_page);
+        $forums_dto = [];
+        foreach($forums as $forum)
+        {
+            $dto = new ForumDto();
+            $dto->id = $forum->id;
+            $dto->parent = $forum->parent;
+            $dto->name = $forum->name;
+            $dto->desc = $forum->desc;
+            $dto->password = $forum->password;
+            $dto->img = $forum->img;
+            $dto->topics_per_page = $forum->topics_per_page;
+            $dto->type = $forum->type;
+            $dto->status = $forum->status;
+            $dto->last_post = $forum->last_post;
+            $dto->last_author = $forum->last_author;
+            $dto->display_on_index = $forum->display_on_index;
+            $dto->display_indexed = $forum->display_indexed;
+            $dto->display_icons = $forum->display_icons;
+            $forums_dto[] = $dto;
+        }
+        return $forums_dto;
+    }
+
+    public function edit(ForumDto $forum): ForumDto
+    {
+        $valid_forum = $this->forum_exists($forum->id);
+        if(!$valid_forum)
+        {
+            throw new ModelNotFoundException('Invalid forum id passed');
+        }
+
+        $updated_forum = $this->model->where('id', $forum->id)->update([
+            "parent" => $forum->parent,
+            "name" => $forum->name,
+            "desc" => $forum->desc,
+            "password" => $forum->password,
+            "img" => $forum->img,
+            "topics_per_page" => $forum->topics_per_page,
+            "type" => $forum->type,
+            "status" => $forum->status,
+            "last_post" => $forum->last_post,
+            "last_author" => $forum->last_author,
+            "display_on_index" => $forum->display_on_index,
+            "display_indexed" => $forum->display_indexed,
+            "display_icons" => $forum->display_icons
+        ]);
+
+        $dto = new ForumDto();
+
+        $dto->parent = $forum->parent;
+        $dto->name = $forum->name;
+        $dto->desc = $forum->desc;
+        $dto->password = $forum->password;
+        $dto->img = $forum->img;
+        $dto->topics_per_page = $forum->topics_per_page;
+        $dto->type = $forum->type;
+        $dto->status = $forum->status;
+        $dto->last_post = $forum->last_post;
+        $dto->last_author = $forum->last_author;
+        $dto->display_on_index = $forum->display_on_index;
+        $dto->display_indexed = $forum->display_indexed;
+        $dto->display_icons = $forum->display_icons;
+
+        return $dto;
+
+    }
 
     public function forum_exists(int $id): bool
     {

@@ -49,6 +49,55 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 
     }
 
+    public function find_by_forum_id(int $forum_id, int $per_page = 10): array
+    {
+        $topics = $this->model->where('forum_id', $forum_id)->paginate($per_page);
+        $topics_dto = [];
+        foreach($topics as $topic)
+        {
+            $dto = new TopicDto();
+            $dto->id = $topic->id;
+            $dto->forum_id = $topic->forum_id;
+            $dto->approved = $topic->approved;
+            $dto->reported = $topic->reported;
+            $dto->title = $topic->title;
+            $dto->views = $topic->views;
+            $dto->status = $topic->status;
+            $dto->type = $topic->type;
+            $dto->created_at = $topic->created_at;
+            $dto->updated_at = $topic->updated_at;
+
+            $topics_dto[] = $dto;
+        }
+
+        return $topics_dto;
+    }
+
+    public function edit(TopicDto $topic): TopicDto
+    {
+        $valid_forum = $this->forum_repository->forum_exists($topic->forum_id);
+        if(!$valid_forum)
+        {
+            throw new ModelNotFoundException('Invalid forum id passed');
+        }
+
+        $updated_topic = $this->model->find($topic->id);
+        $updated_topic->forum_id = $topic->forum_id;
+        $updated_topic->approved = $topic->approved;
+        $updated_topic->title = $topic->title;
+        $updated_topic->type = $topic->type;
+        $updated_topic->save();
+
+        $dto = new TopicDto();
+        $dto->id = $updated_topic->id;
+        $dto->forum_id = $updated_topic->forum_id;
+        $dto->approved = $updated_topic->approved;
+        $dto->title = $updated_topic->title;
+        $dto->type = $updated_topic->type;
+
+        return $dto;
+    }
+
     public function topic_exists(int $id): bool
     {
         $topic = $this->model->find($id);

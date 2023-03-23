@@ -2,6 +2,8 @@
 
 namespace App\Dto;
 
+use Carbon\Carbon;
+
 class PostDto
 {
     public int $id;
@@ -13,4 +15,6 @@ class PostDto
     public string $edit_reason;
     public int $edit_count;
     public int $edit_user;
+    public Carbon $created_at;
+    public Carbon $updated_at;
 }
