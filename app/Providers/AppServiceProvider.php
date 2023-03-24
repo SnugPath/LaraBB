@@ -42,6 +42,17 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface::class,
             \App\Repositories\CustomFieldTypeRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\ForumSubscriptionsRepositoryInterface::class,
+            \App\Repositories\ForumSubscriptionsRepository::class
+        );
+
+        $this->app->bind(
+            \App\Repositories\Interfaces\TopicSubscriptionsRepositoryInterface::class,
+            \App\Repositories\TopicSubscriptionsRepository::class
+        );
+
     }
 
     /**
