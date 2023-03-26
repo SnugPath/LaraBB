@@ -11,6 +11,7 @@ class CustomFieldDataDto
     public int $custom_field_id;
     public int $user_id;
     public string $content;
+    public int $updated_by;
     public Carbon $created_at;
     public Carbon $updated_at;
 

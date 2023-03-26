@@ -4,17 +4,17 @@ namespace App\Dto;
 
 use Carbon\Carbon;
 
-class PostDto
+class TopicDto
 {
     public int $id;
-    public int $topic_id;
-    public int $author;
+    public int $forum_id;
     public bool $approved;
     public bool $reported;
-    public string $content;
-    public string $edit_reason;
-    public int $edit_count;
-    public int $edit_user;
+    public string $title;
+    public int $views;
+    public int $status;
+    public int $type;
     public Carbon $created_at;
     public Carbon $updated_at;
+
 }

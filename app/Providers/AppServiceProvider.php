@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->register_repositories();
     }
@@ -25,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             \App\Repositories\Interfaces\ForumRepositoryInterface::class,
             \App\Repositories\ForumRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\TopicRepositoryInterface::class,
+            \App\Repositories\TopicRepository::class,
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\PostRepositoryInterface::class,
+            \App\Repositories\PostRepository::class,
         );
         $this->app->bind(
             \App\Repositories\Interfaces\GroupRepositoryInterface::class,
@@ -42,17 +50,22 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface::class,
             \App\Repositories\CustomFieldTypeRepository::class
         );
-
         $this->app->bind(
             \App\Repositories\Interfaces\ForumSubscriptionsRepositoryInterface::class,
             \App\Repositories\ForumSubscriptionsRepository::class
         );
-
         $this->app->bind(
             \App\Repositories\Interfaces\TopicSubscriptionsRepositoryInterface::class,
             \App\Repositories\TopicSubscriptionsRepository::class
         );
-
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldDataRepositoryInterface::class,
+            \App\Repositories\CustomFieldDataRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldDataLogRepositoryInterface::class,
+            \App\Repositories\CustomFieldDataLogRepository::class
+        );
     }
 
     /**
