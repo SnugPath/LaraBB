@@ -50,6 +50,14 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Interfaces\CustomFieldTypeRepositoryInterface::class,
             \App\Repositories\CustomFieldTypeRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldDataRepositoryInterface::class,
+            \App\Repositories\CustomFieldDataRepository::class
+        );
+        $this->app->bind(
+            \App\Repositories\Interfaces\CustomFieldDataLogRepositoryInterface::class,
+            \App\Repositories\CustomFieldDataLogRepository::class
+        );
     }
 
     /**
