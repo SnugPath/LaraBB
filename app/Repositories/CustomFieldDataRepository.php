@@ -39,6 +39,7 @@ class CustomFieldDataRepository extends BaseRepository implements CustomFieldDat
      */
     public function setCustomFieldValue(CustomFieldDataDto $custom_field_data): CustomFieldDataDto
     {
+        // We are only checking that it exists. Even if it's inactive, it'll be updated
         $valid_custom_field = $this->custom_field_repository->customFieldExists($custom_field_data->custom_field_id);
         if(!$valid_custom_field)
         {
@@ -55,12 +56,12 @@ class CustomFieldDataRepository extends BaseRepository implements CustomFieldDat
         $custom_field_data_content = $this
             ->model
             ->where('user_id', '=', $custom_field_data->user_id)
-            ->where('custom_field_id', '=', $custom_field_data->custom_field_id)
+            ->where('cf_id', '=', $custom_field_data->custom_field_id)
             ->first();
         if(is_null($custom_field_data_content))
         {
             $custom_field_data_content = $this->model->create([
-                'custom_field_id' => $custom_field_data->custom_field_id,
+                'cf_id' => $custom_field_data->custom_field_id,
                 'content' => $custom_field_data->content ?? null,
                 'user_id' => $custom_field_data->user_id
             ]);

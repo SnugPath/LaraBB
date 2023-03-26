@@ -3,13 +3,14 @@
 namespace App\Repositories;
 
 use App\Dto\CustomFieldDataLogDto;
+use App\Models\CustomFieldDataLog;
 use App\Repositories\Interfaces\CustomFieldDataLogRepositoryInterface;
 
 class CustomFieldDataLogRepository extends BaseRepository implements CustomFieldDataLogRepositoryInterface
 {
     protected $model;
 
-    public function __construct($model)
+    public function __construct(CustomFieldDataLog $model)
     {
         parent::__construct($model);
     }
