@@ -10,7 +10,7 @@
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^9.35",
-        "laravel/sanctum": "^2.15",
+        "laravel/passport": "^11.8",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "league/flysystem-aws-s3-v3": "^3.0"
