@@ -35,7 +35,9 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
             "forum_id" => $topic->forum_id,
             "approved" => $topic->approved,
             "title" => $topic->title,
-            "type" => $topic->type
+            "type" => $topic->type,
+            "views" => $topic->views ?? 0,
+            "status" => $topic->status ?? 1
         ]);
 
         $dto = new TopicDto();
@@ -44,6 +46,8 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
         $dto->approved = $created_topic->approved;
         $dto->title = $created_topic->title;
         $dto->type = $created_topic->type;
+        $dto->views = $created_topic->views;
+        $dto->status = $created_topic->status;
 
         return $dto;
 
