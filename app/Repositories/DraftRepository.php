@@ -8,18 +8,22 @@ use App\Exceptions\InvalidOperationException;
 use App\Models\Draft;
 use App\Repositories\Interfaces\DraftRepositoryInterface;
 use App\Repositories\Interfaces\PostRepositoryInterface;
+use App\Repositories\Interfaces\TopicRepositoryInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DraftRepository extends BaseRepository implements DraftRepositoryInterface
 {
     private PostRepositoryInterface $post_repository;
+    private TopicRepositoryInterface $topic_repository;
 
     public function __construct(
         Draft $model,
-        PostRepositoryInterface $post_repository)
+        PostRepositoryInterface $post_repository,
+        TopicRepositoryInterface $topic_repository)
     {
         parent::__construct($model);
         $this->post_repository = $post_repository;
+        $this->topic_repository = $topic_repository;
     }
 
     /**
@@ -50,9 +54,15 @@ class DraftRepository extends BaseRepository implements DraftRepositoryInterface
     public function create(DraftDto $draft): DraftDto
     {
         $exists_draft_without_post = $this->existsDraftWithoutPost($draft->topic_id, $draft->user_id);
-        if($exists_draft_without_post)
+        if ($exists_draft_without_post)
         {
             throw new InvalidOperationException("There's already a draft for this topic");
+        }
+
+        $exists_topic = $this->topic_repository->topic_exists($draft->topic_id);
+        if (!$exists_topic)
+        {
+            throw new InvalidOperationException("Invalid topic");
         }
 
         $created_draft = $this->model->create([
@@ -81,12 +91,8 @@ class DraftRepository extends BaseRepository implements DraftRepositoryInterface
         }
 
         $existing_draft = $this->find($draft->id);
-        if (is_null($existing_draft))
-        {
-            throw new ModelNotFoundException("Invalid draft");
-        }
 
-        $same_user = $draft->user_id != $existing_draft->user_id;
+        $same_user = $draft->user_id == $existing_draft->user_id;
         if (!$same_user)
         {
             throw new InvalidOperationException("Only the owner of the draft can update it");
