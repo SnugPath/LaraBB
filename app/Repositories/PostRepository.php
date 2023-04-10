@@ -135,4 +135,9 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         return $dto;
     }
+
+    public function findByDraftId($draft_id)
+    {
+        return $this->model->where('draft_id', '=', $draft_id)->first();
+    }
 }

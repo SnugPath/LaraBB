@@ -20,6 +20,7 @@ class Post extends Model
         'edit_reason',
         'edit_count',
         'edit_user',
+        'draft_id'
     ];
 
     public function author() {
