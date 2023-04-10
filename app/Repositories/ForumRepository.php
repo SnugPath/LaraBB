@@ -18,7 +18,8 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
 
     public function create(ForumDto $forum): ForumDto
     {
-        if (isset($forum->parent)) {
+        if (isset($forum->parent))
+        {
             $valid_forum = $this->forum_exists($forum->parent);
             if(!$valid_forum)
             {
@@ -42,24 +43,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
             "display_icons" => $forum->display_icons
         ]);
 
-        $dto = new ForumDto();
-
-        $dto->parent = $forum->parent;
-        $dto->name = $forum->name;
-        $dto->desc = $forum->desc;
-        $dto->password = $forum->password;
-        $dto->img = $forum->img;
-        $dto->topics_per_page = $forum->topics_per_page;
-        $dto->type = $forum->type;
-        $dto->status = $forum->status;
-        $dto->last_post = $forum->last_post;
-        $dto->last_author = $forum->last_author;
-        $dto->display_on_index = $forum->display_on_index;
-        $dto->display_indexed = $forum->display_indexed;
-        $dto->display_icons = $forum->display_icons;
-
-        return $dto;
-
+        return ForumDto::fromModel($created_forum);
     }
     public function find_by_parent_id(int $parent_id, int $per_page = 10): array
     {
@@ -111,23 +95,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
             "display_icons" => $forum->display_icons
         ]);
 
-        $dto = new ForumDto();
-
-        $dto->parent = $forum->parent;
-        $dto->name = $forum->name;
-        $dto->desc = $forum->desc;
-        $dto->password = $forum->password;
-        $dto->img = $forum->img;
-        $dto->topics_per_page = $forum->topics_per_page;
-        $dto->type = $forum->type;
-        $dto->status = $forum->status;
-        $dto->last_post = $forum->last_post;
-        $dto->last_author = $forum->last_author;
-        $dto->display_on_index = $forum->display_on_index;
-        $dto->display_indexed = $forum->display_indexed;
-        $dto->display_icons = $forum->display_icons;
-
-        return $dto;
+        return ForumDto::fromModel($updated_forum);
 
     }
 

@@ -67,6 +67,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\CustomFieldDataLogRepository::class
         );
         $this->app->bind(
+            \App\Repositories\Interfaces\DraftRepositoryInterface::class,
+            \App\Repositories\DraftRepository::class
+        );
+        $this->app->bind(
             \App\Repositories\Interfaces\BannedWordRepositoryInterface::class,
             \App\Repositories\BannedWordRepository::class
         );
