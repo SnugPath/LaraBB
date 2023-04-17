@@ -5,39 +5,19 @@ namespace App\Helpers\Managers;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
-class PluginManager
+class PluginManager extends BaseManager
 {
     private array $plugins = array();
     private string $plugin_directory = "";
-    private Container $app_container;
 
     public function __construct(Container $container) {
-        $this->app_container = $container;
+        parent::__construct($container);
     }
 
 
     public function setDirectory(string $directory_name): void
     {
         $this->plugin_directory = $directory_name;
-    }
-
-    private function extractNamespace($file): string {
-        $namespace = NULL;
-        $handle = fopen($file, "r");
-        if ($handle)
-        {
-            while (($line = fgets($handle)) !== false)
-            {
-                if (str_starts_with($line, 'namespace'))
-                {
-                    $parts = explode(' ', $line);
-                    $namespace = rtrim(trim($parts[1]), ';');
-                    break;
-                }
-            }
-            fclose($handle);
-        }
-        return $namespace;
     }
 
     /**

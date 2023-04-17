@@ -12,6 +12,7 @@ class Config extends Model
     protected $table = "config";
 
     protected $fillable = [
+        'name',
         'value',
         'is_dynamic'
     ];
