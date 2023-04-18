@@ -30,36 +30,22 @@ class EnqueueAssetsServiceProvider extends ServiceProvider
         $assets_container = $this->app->make(Assets::class);
 
         foreach ($assets_container->getAllAssets() as $asset) {
-            if ($asset['type'] == 'style') {
-                Route::get($asset['url'], function () use ($asset) {
-                    if (file_exists($asset['path'])) {
-                        return response()->file($asset['path'], ['Content-Type' => 'text/css']);
-                    }
-                    abort(404);
-                });
-            } else {
-                Route::get($asset['url'], function () use ($asset) {
-                    if (file_exists($asset['path'])) {
-                        return response()->file($asset['path'], ['Content-Type' => 'text/javascript']);
-                    }
-                    abort(404);
-                });
-            }
+            $assets_container->addAssetRoute($asset['url'], $asset['path']);
         }
 
         $header_assets = '';
         $footer_assets = '';
 
         foreach ($assets_container->getStyles() as $style) {
-            $header_assets .= "<link rel='stylesheet' href='/{$style['url']}' type='text/css' />";
+            $header_assets .= "<link rel='stylesheet' href='/{$style['url_with_version']}' type='text/css' />";
         }
 
         foreach ($assets_container->getScriptsInHeader() as $script) {
-            $header_assets .= "<script src='/{$script['url']}'></script>";
+            $header_assets .= "<script src='/{$script['url_with_version']}'></script>";
         }
 
         foreach ($assets_container->getScriptsInFooter() as $script) {
-            $footer_assets .= "<script src='/{$script['url']}'></script>";
+            $footer_assets .= "<script src='/{$script['url_with_version']}'></script>";
         }
 
         view()->share('header_assets', $header_assets);
