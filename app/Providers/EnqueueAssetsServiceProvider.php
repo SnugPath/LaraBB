@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Helpers\Classes\Assets;
+use App\Helpers\Classes\AssetHandler;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,7 @@ class EnqueueAssetsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Assets::class);
+        $this->app->singleton(AssetHandler::class);
     }
 
     /**
@@ -27,25 +27,21 @@ class EnqueueAssetsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $assets_container = $this->app->make(Assets::class);
-
-        foreach ($assets_container->getAllAssets() as $asset) {
-            $assets_container->addAssetRoute($asset['url'], $asset['path']);
-        }
+        $assets_container = $this->app->make(AssetHandler::class);
 
         $header_assets = '';
         $footer_assets = '';
 
         foreach ($assets_container->getStyles() as $style) {
-            $header_assets .= "<link rel='stylesheet' href='/{$style['url_with_version']}' type='text/css' />";
+            $header_assets .= "<link rel='stylesheet' href='/assets/{$style['url_with_version']}' type='text/css' />";
         }
 
         foreach ($assets_container->getScriptsInHeader() as $script) {
-            $header_assets .= "<script src='/{$script['url_with_version']}'></script>";
+            $header_assets .= "<script src='/assets/{$script['url_with_version']}'></script>";
         }
 
         foreach ($assets_container->getScriptsInFooter() as $script) {
-            $footer_assets .= "<script src='/{$script['url_with_version']}'></script>";
+            $footer_assets .= "<script src='/assets/{$script['url_with_version']}'></script>";
         }
 
         view()->share('header_assets', $header_assets);

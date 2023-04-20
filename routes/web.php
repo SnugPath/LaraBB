@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ForumController;
+use App\http\Controllers\AssetController;
 use App\Http\Controllers\CustomFieldController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\RankController;
@@ -18,18 +19,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], function () {
     Route::get('/', [DashboardController::class, 'admin']);
@@ -47,3 +48,7 @@ Route::group(['middleware' => ['auth','user.type.is:1'], 'prefix' => 'admin'], f
        Route::post('/', [CustomFieldController::class, 'createCustomField'])->name('createCustomField');
     });
 });
+
+// assets
+Route::get('/assets/{asset_url}', [AssetController::class, 'getAsset'])->name('getAsset')
+    ->where('asset_url', '.*');;

@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Managers;
 
-use App\Helpers\Classes\Assets;
+use App\Helpers\Classes\AssetHandler;
 use App\Repositories\Interfaces\ConfigRepositoryInterface;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -10,16 +10,16 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 class ThemeManager extends BaseManager
 {
     private ConfigRepositoryInterface $config_repository;
-    private Assets $assets;
+    private AssetHandler $asset_handler;
     private string $theme_directory;
     private mixed $theme;
     private string $theme_name;
 
-    public function __construct(Container $container, ConfigRepositoryInterface $config_repository, Assets $assets)
+    public function __construct(Container $container, ConfigRepositoryInterface $config_repository, AssetHandler $asset_handler)
     {
         parent::__construct($container);
         $this->config_repository = $config_repository;
-        $this->assets = $assets;
+        $this->asset_handler = $asset_handler;
     }
 
     public function setName(string $theme_name): void
@@ -55,6 +55,6 @@ class ThemeManager extends BaseManager
 
     public function loadAssets(): void
     {
-        $this->assets->addAssets($this->theme->loadAssets());
+        $this->asset_handler->addAssets($this->theme->loadAssets());
     }
 }
