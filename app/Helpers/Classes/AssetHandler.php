@@ -28,6 +28,21 @@ class AssetHandler
         return $this->assets;
     }
 
+    public function getStyle(string $asset_prefix, string $name): ?array
+    {
+        return $this->getAsset('style', $asset_prefix, $name);
+    }
+
+    public function getScript(string $asset_prefix, string $name): ?array
+    {
+        return $this->getAsset('script', $asset_prefix, $name);
+    }
+
+    public function getMedia(string $asset_prefix, string $name): ?array
+    {
+        return $this->getAsset('media', $asset_prefix, $name);
+    }
+
     public function getStyles(): array
     {
         return array_filter($this->assets, function($asset) {
@@ -47,6 +62,16 @@ class AssetHandler
         return array_filter($this->assets, function($asset) {
             return $asset['type'] == 'script' && $asset['in_footer'] == true;
         });
+    }
+
+    private function getAsset(string $type, string $asset_prefix, string $name): ?array
+    {
+       foreach ($this->assets as $asset) {
+           if ($asset['type'] == $type && $asset['assets_prefix'] == $asset_prefix && $asset['name'] == $name) {
+               return $asset;
+           }
+       }
+       return null;
     }
 
 }

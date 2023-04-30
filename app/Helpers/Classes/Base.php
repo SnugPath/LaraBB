@@ -56,6 +56,7 @@ abstract class Base
         $url = "$this->asset_prefix/styles/$name.css";
         return array(
             'type' => 'style',
+            'assets_prefix' => $this->asset_prefix,
             'path' => $path,
             'name' => $name,
             'version' => $version,
@@ -78,6 +79,7 @@ abstract class Base
         $url = "$this->asset_prefix/script/$name.js";
         return array(
             'type' => 'script',
+            'assets_prefix' => $this->asset_prefix,
             'path' => $path,
             'name' => $name,
             'version' => $version,
@@ -100,6 +102,7 @@ abstract class Base
         $extension = pathinfo($path, PATHINFO_EXTENSION);
         return array(
             'type' => 'media',
+            'assets_prefix' => $this->asset_prefix,
             'path' => $path,
             'name' => $name,
             'url' => "$this->asset_prefix/$media_prefix/$name.$extension",
