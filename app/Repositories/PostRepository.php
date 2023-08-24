@@ -28,14 +28,14 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     public function create(PostDto $post): PostDto
     {
-        $valid_topic = $this->topic_repository->topic_exists($post->topic_id);
-        if(!$valid_topic)
+        $valid_topic = $this->topic_repository->topicExists($post->topic_id);
+        if (!$valid_topic)
         {
             throw new ModelNotFoundException('Invalid topic id passed');
         }
 
         $valid_user = $this->user_repository->user_exists($post->author);
-        if(!$valid_user)
+        if (!$valid_user)
         {
             throw new ModelNotFoundException('Invalid user id for author passed');
         }
@@ -58,7 +58,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
     }
 
-    public function find_by_topic_id(int $topic_id, int $per_page = 10): array
+    public function findByTopicId(int $topic_id, int $per_page = 10): array
     {
         $posts = $this->model->where('topic_id', $topic_id)->paginate($per_page);
         $posts_dto = [];
@@ -78,7 +78,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $posts_dto;
     }
 
-    public function find_by_user_id(int $user_id, int $per_page = 10): array
+    public function findByUserId(int $user_id, int $per_page = 10): array
     {
         $posts = $this->model->where('author', $user_id)->paginate($per_page);
         $posts_dto = [];
@@ -97,16 +97,17 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
 
         return $posts_dto;
     }
+
     public function edit(PostDto $post): PostDto
     {
-        $valid_topic = $this->topic_repository->topic_exists($post->topic_id);
-        if(!$valid_topic)
+        $valid_topic = $this->topic_repository->topicExists($post->topic_id);
+        if (!$valid_topic)
         {
             throw new ModelNotFoundException('Invalid topic id passed');
         }
 
         $valid_user = $this->user_repository->user_exists($post->author);
-        if(!$valid_user)
+        if (!$valid_user)
         {
             throw new ModelNotFoundException('Invalid user id for author passed');
         }

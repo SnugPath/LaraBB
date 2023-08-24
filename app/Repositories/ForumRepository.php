@@ -21,7 +21,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
         if (isset($forum->parent))
         {
             $valid_forum = $this->forum_exists($forum->parent);
-            if(!$valid_forum)
+            if (!$valid_forum)
             {
                 throw new ModelNotFoundException('Invalid forum id passed');
             }
@@ -45,6 +45,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
 
         return ForumDto::fromModel($created_forum);
     }
+
     public function find_by_parent_id(int $parent_id, int $per_page = 10): array
     {
         $forums = $this->model->where('parent', $parent_id)->paginate($per_page);

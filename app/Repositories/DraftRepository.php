@@ -59,7 +59,7 @@ class DraftRepository extends BaseRepository implements DraftRepositoryInterface
             throw new InvalidOperationException("There's already a draft for this topic");
         }
 
-        $exists_topic = $this->topic_repository->topic_exists($draft->topic_id);
+        $exists_topic = $this->topic_repository->topicExists($draft->topic_id);
         if (!$exists_topic)
         {
             throw new InvalidOperationException("Invalid topic");
@@ -112,7 +112,7 @@ class DraftRepository extends BaseRepository implements DraftRepositoryInterface
      * @return void
      * @throws InvalidOperationException
      */
-    public function deleteDraft(int $draft_id, int $user_id)
+    public function deleteDraft(int $draft_id, int $user_id): void
     {
         $draft = $this->find($draft_id);
         if ($user_id != $draft->user_id)

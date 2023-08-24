@@ -19,9 +19,9 @@ class CustomFieldTypeRepository extends BaseRepository implements CustomFieldTyp
 
     /**
      * Get a list of all custom field types
-     * @return array
+     * @return CustomFieldTypeDto[]
      */
-    public function getCustomFieldTypes()
+    public function getCustomFieldTypes(): array
     {
         $values = $this->model::all();
         $types = [];

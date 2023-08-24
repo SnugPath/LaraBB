@@ -255,11 +255,11 @@ class DraftRepositoryTest extends TestCase
 
         $this->topic_repository_mock = Mockery::mock('App\Repositories\Interfaces\TopicRepositoryInterface');
         $this->topic_repository_mock
-            ->shouldReceive('topic_exists')
+            ->shouldReceive('topicExists')
             ->with($this->valid_topic_id)
             ->andReturn(true);
         $this->topic_repository_mock
-            ->shouldReceive('topic_exists')
+            ->shouldReceive('topicExists')
             ->with($this->invalid_topic_id)
             ->andReturn(false);
     }

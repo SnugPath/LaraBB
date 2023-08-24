@@ -26,7 +26,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
     public function create(TopicDto $topic): TopicDto
     {
         $valid_forum = $this->forum_repository->forum_exists($topic->forum_id);
-        if(!$valid_forum)
+        if (!$valid_forum)
         {
             throw new ModelNotFoundException('Invalid forum id passed');
         }
@@ -53,7 +53,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 
     }
 
-    public function find_by_forum_id(int $forum_id, int $per_page = 10): array
+    public function findByForumId(int $forum_id, int $per_page = 10): array
     {
         $topics = $this->model->where('forum_id', $forum_id)->paginate($per_page);
         $topics_dto = [];
@@ -80,7 +80,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
     public function edit(TopicDto $topic): TopicDto
     {
         $valid_forum = $this->forum_repository->forum_exists($topic->forum_id);
-        if(!$valid_forum)
+        if (!$valid_forum)
         {
             throw new ModelNotFoundException('Invalid forum id passed');
         }
@@ -102,7 +102,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
         return $dto;
     }
 
-    public function topic_exists(int $id): bool
+    public function topicExists(int $id): bool
     {
         $topic = $this->model->find($id);
         return !is_null($topic);
