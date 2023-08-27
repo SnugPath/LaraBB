@@ -25,7 +25,7 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 
     public function create(TopicDto $topic): TopicDto
     {
-        $valid_forum = $this->forum_repository->forum_exists($topic->forum_id);
+        $valid_forum = $this->forum_repository->forumExists($topic->forum_id);
         if (!$valid_forum)
         {
             throw new ModelNotFoundException('Invalid forum id passed');
@@ -79,25 +79,30 @@ class TopicRepository extends BaseRepository implements TopicRepositoryInterface
 
     public function edit(TopicDto $topic): TopicDto
     {
-        $valid_forum = $this->forum_repository->forum_exists($topic->forum_id);
+        $valid_forum = $this->forum_repository->forumExists($topic->forum_id);
         if (!$valid_forum)
         {
             throw new ModelNotFoundException('Invalid forum id passed');
         }
 
-        $updated_topic = $this->model->find($topic->id);
-        $updated_topic->forum_id = $topic->forum_id;
-        $updated_topic->approved = $topic->approved;
-        $updated_topic->title = $topic->title;
-        $updated_topic->type = $topic->type;
-        $updated_topic->save();
+        $existing_topic = $this->model->find($topic->id);
+        if (!$existing_topic)
+        {
+            throw new ModelNotFoundException('Invalid topic id passed');
+        }
+
+        $existing_topic->forum_id = $topic->forum_id;
+        $existing_topic->approved = $topic->approved;
+        $existing_topic->title = $topic->title;
+        $existing_topic->type = $topic->type;
+        $existing_topic->save();
 
         $dto = new TopicDto();
-        $dto->id = $updated_topic->id;
-        $dto->forum_id = $updated_topic->forum_id;
-        $dto->approved = $updated_topic->approved;
-        $dto->title = $updated_topic->title;
-        $dto->type = $updated_topic->type;
+        $dto->id = $existing_topic->id;
+        $dto->forum_id = $existing_topic->forum_id;
+        $dto->approved = $existing_topic->approved;
+        $dto->title = $existing_topic->title;
+        $dto->type = $existing_topic->type;
 
         return $dto;
     }

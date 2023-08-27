@@ -3,8 +3,6 @@
 namespace Tests\Unit\Repositories;
 
 use App\Dto\DraftDto;
-use App\Dto\PostDto;
-use App\Dto\RankDto;
 use App\Exceptions\Draft\DraftIsAlreadyAPostException;
 use App\Exceptions\InvalidOperationException;
 use App\Models\Draft;
