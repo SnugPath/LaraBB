@@ -52,22 +52,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
         $forums_dto = [];
         foreach($forums as $forum)
         {
-            $dto = new ForumDto();
-            $dto->id = $forum->id;
-            $dto->parent = $forum->parent;
-            $dto->name = $forum->name;
-            $dto->desc = $forum->desc;
-            $dto->password = $forum->password;
-            $dto->img = $forum->img;
-            $dto->topics_per_page = $forum->topics_per_page;
-            $dto->type = $forum->type;
-            $dto->status = $forum->status;
-            $dto->last_post = $forum->last_post;
-            $dto->last_author = $forum->last_author;
-            $dto->display_on_index = $forum->display_on_index;
-            $dto->display_indexed = $forum->display_indexed;
-            $dto->display_icons = $forum->display_icons;
-            $forums_dto[] = $dto;
+            $forums_dto[] = ForumDto::fromModel($forum);
         }
         return $forums_dto;
     }
@@ -75,7 +60,7 @@ class ForumRepository extends BaseRepository implements ForumRepositoryInterface
     public function edit(ForumDto $forum): ForumDto
     {
         $valid_forum = $this->forumExists($forum->id);
-        if(!$valid_forum)
+        if (!$valid_forum)
         {
             throw new ModelNotFoundException('Invalid forum id passed');
         }

@@ -3,8 +3,6 @@
 namespace Tests\Unit\Repositories;
 
 use App\Dto\TopicDto;
-use App\Models\Post;
-use App\Repositories\Interfaces\ForumRepositoryInterface;
 use App\Repositories\TopicRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -103,7 +101,7 @@ class TopicRepositoryTest extends TestCase
 
         $topic_repository->edit($dto);
     }
-    
+
     /** Private methods */
 
     private function setupTopicRepository($topic, $forum_repository_interface): TopicRepository
